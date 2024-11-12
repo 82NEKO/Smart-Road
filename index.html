@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmArtRoad</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQueryの読み込み -->
+  <script src="script.js"></script>
+</head>
+<body>
+  <div id="tutorial-modal" class="modal">
+    <div class="modal-content">
+      <img src="img/logo.svg" alt="SmArt Road ロゴ" class="logo">
+      <div class="tutorial-title">
+        <p class="decoration">welcome</p>
+        <h2 class="title">ようこそ！</h2>
+      </div>
+      <img src="img/tutorial/01.png" alt="チュートリアル画像" class="tutorial-image">
+      <p class="tutorial-text">
+        このサイトでは、未来のSmArt Roadが施工された下北沢の街を体験できます。最新の技術で、道路をアートのキャンバスとして利用し、街の魅力を新しい形で楽しむことができます！
+      </p>
+      <button id="next-tutorial" class="tutorial-button">次へ</button>
+    </div>
+  </div>
+
+  <!--ナビゲーション（二種類）-->
+    <div id="navbar-situation" class="navbar">
+      <img src="img/logo.svg" alt="">
+      <div class="navbar-item">
+        <h3>Scaling</h3>
+      <div class="navbar__zoom">
+          <div class="zoom-inner">
+          <div class="navbar__zoom-left">
+            <div class="zoom-button">
+              <button class="button" id="zoom-out">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_540_130" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="30">
+                <rect width="30" height="30" fill="#D9D9D9"/>
+                </mask>
+                <g mask="url(#mask0_540_130)">
+                <path d="M24.3288 26.2684L16.5272 18.4659C15.9172 18.9461 15.2124 19.3193 14.4128 19.5853C13.6132 19.8514 12.7646 19.9844 11.8669 19.9844C9.61104 19.9844 7.6999 19.2018 6.13344 17.6366C4.56719 16.0714 3.78406 14.1618 3.78406 11.9078C3.78406 9.65365 4.56656 7.74344 6.13156 6.17719C7.69677 4.61115 9.60646 3.82812 11.8606 3.82812C14.1148 3.82812 16.0249 4.61135 17.5909 6.17781C19.1572 7.74406 19.9403 9.65521 19.9403 11.9112C19.9403 12.8137 19.8047 13.6649 19.5334 14.4647C19.262 15.2645 18.8915 15.9667 18.4219 16.5712L26.2316 24.3728L24.3288 26.2684ZM11.8622 17.2969C13.3693 17.2969 14.6445 16.7752 15.6878 15.7319C16.7311 14.6888 17.2528 13.4135 17.2528 11.9063C17.2528 10.399 16.7311 9.12375 15.6878 8.08063C14.6445 7.03729 13.3693 6.51563 11.8622 6.51563C10.3549 6.51563 9.07958 7.03729 8.03625 8.08063C6.99312 9.12375 6.47156 10.399 6.47156 11.9063C6.47156 13.4135 6.99312 14.6888 8.03625 15.7319C9.07958 16.7752 10.3549 17.2969 11.8622 17.2969ZM8.79969 13.0781V10.7344H14.9247V13.0781H8.79969Z" fill="#13B9F1"/>
+                </g>
+                <defs>
+                <linearGradient id="paint0_linear_540_130" x1="15.0078" y1="3.82812" x2="15.0078" y2="26.2684" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#13B9F1"/>
+                <stop offset="1" stop-color="#06383C"/>
+                </linearGradient>
+                </defs>
+                </svg>
+              </button>
+              <button class="button" id="zoom-in">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_540_178" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="30">
+                <rect width="30" height="30" fill="#D9D9D9"/>
+                </mask>
+                <g mask="url(#mask0_540_178)">
+                <path d="M24.485 26.5341L16.5578 18.6066C15.9378 19.0868 15.2228 19.4677 14.4128 19.7494C13.6028 20.031 12.737 20.1719 11.8153 20.1719C9.49948 20.1719 7.53771 19.368 5.93 17.7603C4.32229 16.1524 3.51844 14.1906 3.51844 11.875C3.51844 9.55938 4.32229 7.5976 5.93 5.98969C7.53771 4.38198 9.49948 3.57812 11.8153 3.57812C14.1309 3.57812 16.0926 4.38198 17.7003 5.98969C19.3082 7.5976 20.1122 9.55938 20.1122 11.875C20.1122 12.8017 19.9714 13.6675 19.6897 14.4725C19.4078 15.2775 19.0269 15.9875 18.5469 16.6025L26.4816 24.5447L24.485 26.5341ZM11.8153 17.3281C13.3328 17.3281 14.621 16.7986 15.68 15.7397C16.739 14.6809 17.2684 13.3927 17.2684 11.875C17.2684 10.3573 16.739 9.06906 15.68 8.01031C14.621 6.95135 13.3328 6.42188 11.8153 6.42188C10.2976 6.42188 9.00927 6.95135 7.95031 8.01031C6.89156 9.06906 6.36219 10.3573 6.36219 11.875C6.36219 13.3927 6.89156 14.6809 7.95031 15.7397C9.00927 16.7986 10.2976 17.3281 11.8153 17.3281ZM10.5653 15.5803V13.125H8.11V10.625H10.5653V8.16969H13.0653V10.625H15.5203V13.125H13.0653V15.5803H10.5653Z" fill="#13B9F1"/>
+                </g>
+                <defs>
+                <linearGradient id="paint0_linear_540_178" x1="15" y1="3.57812" x2="15" y2="26.5341" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#13B9F1"/>
+                <stop offset="1" stop-color="#06383C"/>
+                </linearGradient>
+                </defs>
+                </svg>          
+              </button>
+            </div>
+            <div id="zoom-level">100%</div>
+          </div>
+          <div class="navbar__zoom-right">
+            <input type="range" name="range" value="10" min="10" max="100" orient="vertical" id="zoom-slider" class="zoom-gage" />
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="navbar-item">
+        <h3>Building opacity</h3>
+      <div class="navbar__opacity">
+        <div class="zoom-inner">
+          <div class="navbar__zoom-left">
+            <div class="zoom-button">
+              <!-- マイナスボタン -->
+              <button class="button" id="opacity-decrease">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="30" height="30" fill="none"/>
+                  <path d="M8 15H22" stroke="#13B9F1" stroke-width="2"/>
+                </svg>
+              </button>
+              
+              <!-- プラスボタン -->
+              <button class="button" id="opacity-increase">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="30" height="30" fill="none"/>
+                  <path d="M15 8V22" stroke="#13B9F1" stroke-width="2"/>
+                  <path d="M8 15H22" stroke="#13B9F1" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+            <!-- 現在の透明度表示 -->
+            <div id="opacity-level">100%</div>
+          </div>
+    
+          <!-- 透明度スライダー -->
+          <div class="navbar__zoom-right">
+            <input type="range" id="opacity-slider" class="zoom-gage" min="0" max="100" value="100" step="1">
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="navbar-item">
+              <h3>Road change</h3>
+      <div class="road-toggle">
+        <div class="road-inner">
+          <!-- 各レイヤーを切り替えるボタン -->
+          <button class="road-toggle-btn" data-layer="1">Default</button>
+          <button class="road-toggle-btn" data-layer="2">Grassland</button>
+          <button class="road-toggle-btn" data-layer="3">Sea</button>
+          <button class="road-toggle-btn" data-layer="4">Universe</button>
+          <button class="road-toggle-btn" data-layer="5">BIG LOVE</button>
+          <button class="road-toggle-btn" data-layer="6">Street Art</button>
+          <button class="road-toggle-btn" data-layer="7">7</button>
+          <button class="road-toggle-btn" data-layer="8">8</button>
+        </div>
+      </div>
+      </div>
+      
+    </div>
+      
+    <div id="navbar-technology" class="navbar" style="display: none;">
+        <!-- テクノロジーナビゲーションの内容 -->
+        <h3>テクノロジーナビゲーション</h3>
+        <!-- テクノロジーに関連したコントロールを追加 -->
+    </div>
+
+    <div id="card-container">
+      <!-- 初期状態で表示されるカード -->
+      <div class="card" id="card-1">
+        <div class="card-inner">
+          <img src="img/card-img/01.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Navigate Evolution</p>
+            <p class="title-xs">ナビゲート・エボリューション</p>
+            </div>
+            <p class="text-xs">スマートナビゲーションは地面に自分の生きたい建物やお店を映し出すことができる</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-2" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-3" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-4" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-5" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-6" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-7" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-8" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-9" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-10" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-11" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-12" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-13" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-14" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-15" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-16" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-17" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-18" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-19" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-20" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-21" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-22" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="card-23" style="display: none;">
+        <div class="card-inner">
+          <img src="img/card-img/image.png" alt="">
+          <div class="card-text">
+            <div class="card-text-title">
+            <p class="decoration-xs">Realtime Information bord</p>
+            <p class="title-xs">リアルタイム・インフォメーション機能</p>
+            </div>
+            <p class="text-xs">道路の液晶パネルがリアルタイムで下北沢のイベント情報やお店のプロモーション、天気情報、交通状況などを表示するインフォメーションボードとして機能する。</p>
+          </div>
+        </div>
+      </div>
+      <!-- カード3〜23も同様に追加 -->
+    </div>
+  <!-- </div> -->
+  <div id="container">
+    <div id="content">
+      <!-- ここにコンテンツを追加 -->
+      
+      <button id="toggle-nav">ナビゲーション切り替え</button>
+        <!-- 各アクションボタン -->
+        
+        <button class="card-toggle-btn position01" data-card="1">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.4558 238.456C11.397 224.397 11.397 201.603 25.4558 187.544L186.676 26.324C200.735 12.2651 223.529 12.2651 237.588 26.324L398.808 187.544C412.867 201.603 412.867 224.397 398.808 238.456L237.588 399.676C223.529 413.735 200.735 413.735 186.676 399.676L25.4558 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M207.637 37.3848L36.5176 208.505C34.1744 210.848 34.1744 214.647 36.5176 216.99L207.637 388.11C209.981 390.453 213.78 390.453 216.123 388.11L387.243 216.99C389.586 214.647 389.586 210.848 387.243 208.505L216.123 37.3848C213.78 35.0416 209.981 35.0416 207.637 37.3848ZM29.4465 201.434C23.1981 207.682 23.1981 217.813 29.4465 224.061L200.566 395.181C206.815 401.429 216.945 401.429 223.194 395.181L394.314 224.061C400.562 217.813 400.562 207.682 394.314 201.434L223.194 30.3137C216.945 24.0653 206.815 24.0653 200.566 30.3137L29.4465 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264047)">
+            <mask id="mask0_1068_264047" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.133" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264047)">
+            <path d="M174.63 250.501L232.964 233.834L249.63 175.501L191.297 192.167L174.63 250.501ZM212.13 225.501C208.658 225.501 205.707 224.285 203.276 221.855C200.845 219.424 199.63 216.473 199.63 213.001C199.63 209.528 200.845 206.577 203.276 204.146C205.707 201.716 208.658 200.501 212.13 200.501C215.602 200.501 218.554 201.716 220.984 204.146C223.415 206.577 224.63 209.528 224.63 213.001C224.63 216.473 223.415 219.424 220.984 221.855C218.554 224.285 215.602 225.501 212.13 225.501ZM212.13 296.334C200.602 296.334 189.769 294.146 179.63 289.771C169.491 285.396 160.672 279.459 153.172 271.959C145.672 264.459 139.734 255.639 135.359 245.501C130.984 235.362 128.797 224.528 128.797 213.001C128.797 201.473 130.984 190.639 135.359 180.501C139.734 170.362 145.672 161.542 153.172 154.042C160.672 146.542 169.491 140.605 179.63 136.23C189.769 131.855 200.602 129.667 212.13 129.667C223.658 129.667 234.491 131.855 244.63 136.23C254.769 140.605 263.589 146.542 271.089 154.042C278.589 161.542 284.526 170.362 288.901 180.501C293.276 190.639 295.464 201.473 295.464 213.001C295.464 224.528 293.276 235.362 288.901 245.501C284.526 255.639 278.589 264.459 271.089 271.959C263.589 279.459 254.769 285.396 244.63 289.771C234.491 294.146 223.658 296.334 212.13 296.334ZM212.13 279.667C230.602 279.667 246.332 273.174 259.318 260.188C272.304 247.202 278.797 231.473 278.797 213.001C278.797 194.528 272.304 178.799 259.318 165.813C246.332 152.827 230.602 146.334 212.13 146.334C193.658 146.334 177.929 152.827 164.943 165.813C151.957 178.799 145.464 194.528 145.464 213.001C145.464 231.473 151.957 247.202 164.943 260.188C177.929 273.174 193.658 279.667 212.13 279.667Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264047">
+            <rect width="200" height="200" fill="white" transform="translate(112.133 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position02" data-card="2">
+          <svg width="426" height="426" viewBox="0 0 426 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.3982 238.456C12.3394 224.397 12.3394 201.603 26.3982 187.544L187.619 26.324C201.677 12.2651 224.471 12.2651 238.53 26.324L399.751 187.544C413.809 201.603 413.809 224.397 399.751 238.456L238.53 399.676C224.471 413.735 201.677 413.735 187.619 399.676L26.3982 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.58 37.3848L37.46 208.505C35.1168 210.848 35.1168 214.647 37.46 216.99L208.58 388.11C210.923 390.453 214.722 390.453 217.065 388.11L388.185 216.99C390.528 214.647 390.528 210.848 388.185 208.505L217.065 37.3848C214.722 35.0416 210.923 35.0416 208.58 37.3848ZM30.3889 201.434C24.1405 207.682 24.1405 217.813 30.3889 224.061L201.509 395.181C207.757 401.429 217.888 401.429 224.136 395.181L395.256 224.061C401.504 217.813 401.504 207.682 395.256 201.434L224.136 30.3137C217.888 24.0653 207.757 24.0653 201.509 30.3137L30.3889 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264065)">
+            <mask id="mask0_1068_264065" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="113" y="113" width="201" height="201">
+            <rect x="113.075" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264065)">
+            <path d="M146.408 279.667C141.825 279.667 137.901 278.035 134.638 274.771C131.374 271.507 129.742 267.584 129.742 263V163C129.742 158.417 131.374 154.493 134.638 151.229C137.901 147.965 141.825 146.334 146.408 146.334H279.742C284.325 146.334 288.249 147.965 291.513 151.229C294.776 154.493 296.408 158.417 296.408 163V263C296.408 267.584 294.776 271.507 291.513 274.771C288.249 278.035 284.325 279.667 279.742 279.667H146.408ZM201.2 263H279.742V198.625L274.117 190.917L254.742 197.167L235.575 190.917L223.492 207.375L204.117 213.625V234.042L192.242 250.5L201.2 263ZM180.575 263L171.617 250.5L187.45 228.625V201.542L213.075 193.209L229.117 171.334L254.742 179.667L279.742 171.542V163H146.408V263H180.575Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264065">
+            <rect width="200" height="200" fill="white" transform="translate(113.075 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position03" data-card="3">
+          <svg width="426" height="426" viewBox="0 0 426 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.3409 238.456C12.282 224.397 12.282 201.603 26.3409 187.544L187.561 26.324C201.62 12.2651 224.414 12.2651 238.473 26.324L399.693 187.544C413.752 201.603 413.752 224.397 399.693 238.456L238.473 399.676C224.414 413.735 201.62 413.735 187.561 399.676L26.3409 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.522 37.3848L37.4026 208.505C35.0594 210.848 35.0595 214.647 37.4026 216.99L208.522 388.11C210.866 390.453 214.665 390.453 217.008 388.11L388.128 216.99C390.471 214.647 390.471 210.848 388.128 208.505L217.008 37.3848C214.665 35.0416 210.866 35.0416 208.522 37.3848ZM30.3315 201.434C24.0831 207.682 24.0831 217.813 30.3315 224.061L201.451 395.181C207.7 401.429 217.83 401.429 224.079 395.181L395.199 224.061C401.447 217.813 401.447 207.682 395.199 201.434L224.079 30.3137C217.83 24.0653 207.7 24.0653 201.451 30.3137L30.3315 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264073)">
+            <mask id="mask0_1068_264073" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="113" y="113" width="201" height="201">
+            <rect x="113.018" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264073)">
+            <path d="M163.018 254.667H221.351V238H163.018V254.667ZM246.351 254.667H263.018V171.334H246.351V254.667ZM163.018 221.334H221.351V204.667H163.018V221.334ZM163.018 188H221.351V171.334H163.018V188ZM146.351 288C141.768 288 137.844 286.368 134.58 283.104C131.317 279.84 129.685 275.917 129.685 271.334V154.667C129.685 150.084 131.317 146.16 134.58 142.896C137.844 139.632 141.768 138 146.351 138H279.685C284.268 138 288.192 139.632 291.455 142.896C294.719 146.16 296.351 150.084 296.351 154.667V271.334C296.351 275.917 294.719 279.84 291.455 283.104C288.192 286.368 284.268 288 279.685 288H146.351ZM146.351 271.334H279.685V154.667H146.351V271.334Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264073">
+            <rect width="200" height="200" fill="white" transform="translate(113.018 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position04" data-card="4">
+          <svg width="426" height="426" viewBox="0 0 426 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.2835 238.456C12.2246 224.397 12.2246 201.603 26.2835 187.544L187.504 26.324C201.563 12.2651 224.357 12.2651 238.416 26.324L399.636 187.544C413.695 201.603 413.695 224.397 399.636 238.456L238.416 399.676C224.357 413.735 201.563 413.735 187.504 399.676L26.2835 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.465 37.3848L37.3452 208.505C35.0021 210.848 35.0021 214.647 37.3452 216.99L208.465 388.11C210.808 390.453 214.607 390.453 216.95 388.11L388.07 216.99C390.413 214.647 390.413 210.848 388.07 208.505L216.95 37.3848C214.607 35.0416 210.808 35.0416 208.465 37.3848ZM30.2742 201.434C24.0258 207.682 24.0258 217.813 30.2742 224.061L201.394 395.181C207.642 401.429 217.773 401.429 224.021 395.181L395.141 224.061C401.39 217.813 401.39 207.682 395.141 201.434L224.021 30.3137C217.773 24.0653 207.642 24.0653 201.394 30.3137L30.2742 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264081)">
+            <mask id="mask0_1068_264081" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.96" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264081)">
+            <path d="M162.961 288.002C156.711 288.002 150.53 286.474 144.419 283.419C138.308 280.363 133.377 276.335 129.627 271.335C133.238 271.335 136.919 269.912 140.669 267.064C144.419 264.217 146.294 260.085 146.294 254.669C146.294 247.724 148.724 241.821 153.586 236.96C158.447 232.099 164.349 229.669 171.294 229.669C178.238 229.669 184.141 232.099 189.002 236.96C193.863 241.821 196.294 247.724 196.294 254.669C196.294 263.835 193.03 271.682 186.502 278.21C179.974 284.738 172.127 288.002 162.961 288.002ZM162.961 271.335C167.544 271.335 171.467 269.703 174.731 266.439C177.995 263.176 179.627 259.252 179.627 254.669C179.627 252.307 178.829 250.328 177.231 248.731C175.634 247.134 173.655 246.335 171.294 246.335C168.933 246.335 166.954 247.134 165.356 248.731C163.759 250.328 162.961 252.307 162.961 254.669C162.961 257.863 162.579 260.78 161.815 263.419C161.051 266.057 160.044 268.557 158.794 270.919C159.488 271.196 160.183 271.335 160.877 271.335H162.961ZM210.877 238.002L187.961 215.085L262.544 140.502C264.072 138.974 265.981 138.176 268.273 138.106C270.565 138.037 272.544 138.835 274.211 140.502L285.461 151.752C287.127 153.419 287.961 155.363 287.961 157.585C287.961 159.807 287.127 161.752 285.461 163.419L210.877 238.002Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264081">
+            <rect width="200" height="200" fill="white" transform="translate(112.96 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position05" data-card="5">
+          <svg width="426" height="426" viewBox="0 0 426 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.2259 238.456C12.167 224.397 12.167 201.603 26.2259 187.544L187.446 26.324C201.505 12.2651 224.299 12.2651 238.358 26.324L399.578 187.544C413.637 201.603 413.637 224.397 399.578 238.456L238.358 399.676C224.299 413.735 201.505 413.735 187.446 399.676L26.2259 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.407 37.3848L37.2876 208.505C34.9445 210.848 34.9445 214.647 37.2876 216.99L208.407 388.11C210.751 390.453 214.55 390.453 216.893 388.11L388.013 216.99C390.356 214.647 390.356 210.848 388.013 208.505L216.893 37.3848C214.55 35.0416 210.751 35.0416 208.407 37.3848ZM30.2165 201.434C23.9682 207.682 23.9681 217.813 30.2165 224.061L201.336 395.181C207.585 401.429 217.715 401.429 223.964 395.181L395.084 224.061C401.332 217.813 401.332 207.682 395.084 201.434L223.964 30.3137C217.715 24.0653 207.585 24.0653 201.336 30.3137L30.2165 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264089)">
+            <mask id="mask0_1068_264089" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.903" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264089)">
+            <path d="M162.903 229.667H262.903V213H162.903V229.667ZM162.903 204.667H262.903V188H162.903V204.667ZM162.903 179.667H262.903V163H162.903V179.667ZM296.236 296.334L262.903 263H146.236C141.653 263 137.729 261.368 134.465 258.104C131.201 254.84 129.569 250.917 129.569 246.334V146.334C129.569 141.75 131.201 137.827 134.465 134.563C137.729 131.299 141.653 129.667 146.236 129.667H279.569C284.153 129.667 288.076 131.299 291.34 134.563C294.604 137.827 296.236 141.75 296.236 146.334V296.334ZM146.236 246.334H269.986L279.569 255.709V146.334H146.236V246.334Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264089">
+            <rect width="200" height="200" fill="white" transform="translate(112.903 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position06" data-card="6">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.1682 238.456C12.1094 224.397 12.1094 201.603 26.1682 187.544L187.389 26.324C201.447 12.2651 224.241 12.2651 238.3 26.324L399.521 187.544C413.58 201.603 413.58 224.397 399.521 238.456L238.3 399.676C224.241 413.735 201.447 413.735 187.389 399.676L26.1682 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.35 37.3848L37.23 208.505C34.8868 210.848 34.8868 214.647 37.23 216.99L208.35 388.11C210.693 390.453 214.492 390.453 216.835 388.11L387.955 216.99C390.298 214.647 390.298 210.848 387.955 208.505L216.835 37.3848C214.492 35.0416 210.693 35.0416 208.35 37.3848ZM30.1589 201.434C23.9105 207.682 23.9105 217.813 30.1589 224.061L201.279 395.181C207.527 401.429 217.658 401.429 223.906 395.181L395.026 224.061C401.274 217.813 401.274 207.682 395.026 201.434L223.906 30.3137C217.658 24.0653 207.527 24.0653 201.279 30.3137L30.1589 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264097)">
+            <mask id="mask0_1068_264097" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.845" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264097)">
+            <path d="M212.012 296.334L249.929 196.334H267.429L305.345 296.334H287.845L278.887 270.917H238.47L229.512 296.334H212.012ZM146.179 271.334L134.512 259.667L176.595 217.584C171.734 212.722 167.324 207.167 163.366 200.917C159.408 194.667 155.762 187.584 152.429 179.667H169.929C172.706 185.084 175.484 189.806 178.262 193.834C181.04 197.861 184.373 201.889 188.262 205.917C192.845 201.334 197.602 194.91 202.533 186.646C207.463 178.382 211.179 170.5 213.679 163H121.179V146.334H179.512V129.667H196.179V146.334H254.512V163H230.345C227.429 173 223.054 183.278 217.22 193.834C211.387 204.389 205.623 212.445 199.929 218L219.929 238.417L213.679 255.5L188.262 229.459L146.179 271.334ZM243.679 256.334H273.679L258.679 213.834L243.679 256.334Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264097">
+            <rect width="200" height="200" fill="white" transform="translate(112.845 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position07" data-card="7">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.1106 238.456C12.0518 224.397 12.0518 201.603 26.1106 187.544L187.331 26.324C201.39 12.2651 224.184 12.2651 238.243 26.324L399.463 187.544C413.522 201.603 413.522 224.397 399.463 238.456L238.243 399.676C224.184 413.735 201.39 413.735 187.331 399.676L26.1106 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.292 37.3848L37.1724 208.505C34.8292 210.848 34.8292 214.647 37.1724 216.99L208.292 388.11C210.635 390.453 214.434 390.453 216.777 388.11L387.897 216.99C390.24 214.647 390.24 210.848 387.897 208.505L216.777 37.3848C214.434 35.0416 210.635 35.0416 208.292 37.3848ZM30.1013 201.434C23.8529 207.682 23.8529 217.813 30.1013 224.061L201.221 395.181C207.47 401.429 217.6 401.429 223.849 395.181L394.968 224.061C401.217 217.813 401.217 207.682 394.968 201.434L223.849 30.3137C217.6 24.0653 207.47 24.0653 201.221 30.3137L30.1013 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264057)">
+            <mask id="mask0_1068_264057" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.788" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264057)">
+            <path d="M137.788 271.334C133.204 271.334 129.281 269.702 126.017 266.438C122.753 263.174 121.121 259.25 121.121 254.667V171.334C121.121 166.75 122.753 162.827 126.017 159.563C129.281 156.299 133.204 154.667 137.788 154.667H221.121C225.704 154.667 229.628 156.299 232.892 159.563C236.156 162.827 237.788 166.75 237.788 171.334V254.667C237.788 259.25 236.156 263.174 232.892 266.438C229.628 269.702 225.704 271.334 221.121 271.334H137.788ZM137.788 254.667H221.121V171.334H137.788V254.667ZM146.121 238H212.788L191.121 208.834L175.288 229.667L163.621 214.25L146.121 238ZM254.454 271.334V154.667H271.121V271.334H254.454ZM287.788 271.334V154.667H304.454V271.334H287.788Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264057">
+            <rect width="200" height="200" fill="white" transform="translate(112.788 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position08" data-card="8">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.053 238.456C11.9941 224.397 11.9941 201.603 26.053 187.544L187.273 26.324C201.332 12.2651 224.126 12.2651 238.185 26.324L399.405 187.544C413.464 201.603 413.464 224.397 399.405 238.456L238.185 399.676C224.126 413.735 201.332 413.735 187.273 399.676L26.053 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.235 37.3848L37.1148 208.505C34.7716 210.848 34.7716 214.647 37.1148 216.99L208.235 388.11C210.578 390.453 214.377 390.453 216.72 388.11L387.84 216.99C390.183 214.647 390.183 210.848 387.84 208.505L216.72 37.3848C214.377 35.0416 210.578 35.0416 208.235 37.3848ZM30.0437 201.434C23.7953 207.682 23.7953 217.813 30.0437 224.061L201.164 395.181C207.412 401.429 217.543 401.429 223.791 395.181L394.911 224.061C401.159 217.813 401.159 207.682 394.911 201.434L223.791 30.3137C217.543 24.0653 207.412 24.0653 201.164 30.3137L30.0437 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264105)">
+            <mask id="mask0_1068_264105" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.73" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264105)">
+            <path d="M146.063 279.667V256.334C146.063 251.611 147.279 247.271 149.709 243.313C152.14 239.354 155.369 236.334 159.397 234.25C168.008 229.945 176.758 226.715 185.647 224.563C194.536 222.41 203.563 221.334 212.73 221.334C217.869 221.334 222.938 221.646 227.938 222.271C232.938 222.896 237.938 223.903 242.938 225.292L228.98 239.459C226.202 239.042 223.494 238.695 220.855 238.417C218.216 238.139 215.508 238 212.73 238C204.952 238 197.244 238.938 189.605 240.813C181.966 242.688 174.397 245.5 166.897 249.25C165.647 249.945 164.64 250.917 163.876 252.167C163.112 253.417 162.73 254.806 162.73 256.334V263H212.73V279.667H146.063ZM229.397 288V262.375L275.438 216.542C276.688 215.292 278.077 214.389 279.605 213.834C281.133 213.278 282.661 213 284.188 213C285.855 213 287.452 213.313 288.98 213.938C290.508 214.563 291.897 215.5 293.147 216.75L300.855 224.459C301.966 225.709 302.834 227.097 303.459 228.625C304.084 230.153 304.397 231.681 304.397 233.209C304.397 234.736 304.119 236.299 303.563 237.896C303.008 239.493 302.105 240.917 300.855 242.167L255.022 288H229.397ZM241.897 275.5H249.813L275.022 250.084L271.272 246.125L267.313 242.375L241.897 267.584V275.5ZM271.272 246.125L267.313 242.375L275.022 250.084L271.272 246.125ZM212.73 213C203.563 213 195.716 209.736 189.188 203.209C182.661 196.681 179.397 188.834 179.397 179.667C179.397 170.5 182.661 162.653 189.188 156.125C195.716 149.597 203.563 146.334 212.73 146.334C221.897 146.334 229.744 149.597 236.272 156.125C242.799 162.653 246.063 170.5 246.063 179.667C246.063 188.834 242.799 196.681 236.272 203.209C229.744 209.736 221.897 213 212.73 213ZM212.73 196.334C217.313 196.334 221.237 194.702 224.501 191.438C227.765 188.174 229.397 184.25 229.397 179.667C229.397 175.084 227.765 171.16 224.501 167.896C221.237 164.632 217.313 163 212.73 163C208.147 163 204.223 164.632 200.959 167.896C197.695 171.16 196.063 175.084 196.063 179.667C196.063 184.25 197.695 188.174 200.959 191.438C204.223 194.702 208.147 196.334 212.73 196.334Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264105">
+            <rect width="200" height="200" fill="white" transform="translate(112.73 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position09" data-card="9">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.9954 238.456C11.9365 224.397 11.9365 201.603 25.9954 187.544L187.216 26.324C201.275 12.2651 224.069 12.2651 238.127 26.324L399.348 187.544C413.407 201.603 413.407 224.397 399.348 238.456L238.127 399.676C224.069 413.735 201.275 413.735 187.216 399.676L25.9954 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.177 37.3848L37.0571 208.505C34.714 210.848 34.714 214.647 37.0571 216.99L208.177 388.11C210.52 390.453 214.319 390.453 216.662 388.11L387.782 216.99C390.125 214.647 390.125 210.848 387.782 208.505L216.662 37.3848C214.319 35.0416 210.52 35.0416 208.177 37.3848ZM29.9861 201.434C23.7377 207.682 23.7377 217.813 29.9861 224.061L201.106 395.181C207.354 401.429 217.485 401.429 223.733 395.181L394.853 224.061C401.102 217.813 401.102 207.682 394.853 201.434L223.733 30.3137C217.485 24.0653 207.354 24.0653 201.106 30.3137L29.9861 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264113)">
+            <mask id="mask0_1068_264113" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.672" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264113)">
+            <path d="M187.672 204.667H204.339V171.334H187.672V204.667ZM212.672 204.667H229.339V171.334H212.672V204.667ZM237.672 204.667H254.339V171.334H237.672V204.667ZM162.672 296.334C158.089 296.334 154.165 294.702 150.902 291.438C147.638 288.174 146.006 284.25 146.006 279.667V179.667L196.006 129.667H262.672C267.256 129.667 271.179 131.299 274.443 134.563C277.707 137.827 279.339 141.75 279.339 146.334V279.667C279.339 284.25 277.707 288.174 274.443 291.438C271.179 294.702 267.256 296.334 262.672 296.334H162.672ZM162.672 279.667H262.672V146.334H203.089L162.672 186.75V279.667Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264113">
+            <rect width="200" height="200" fill="white" transform="translate(112.672 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position10" data-card="10">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.9378 238.456C11.8789 224.397 11.8789 201.603 25.9378 187.544L187.158 26.324C201.217 12.2651 224.011 12.2651 238.07 26.324L399.29 187.544C413.349 201.603 413.349 224.397 399.29 238.456L238.07 399.676C224.011 413.735 201.217 413.735 187.158 399.676L25.9378 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.119 37.3848L36.9995 208.505C34.6564 210.848 34.6564 214.647 36.9995 216.99L208.119 388.11C210.463 390.453 214.261 390.453 216.605 388.11L387.724 216.99C390.068 214.647 390.068 210.848 387.724 208.505L216.605 37.3848C214.261 35.0416 210.463 35.0416 208.119 37.3848ZM29.9285 201.434C23.6801 207.682 23.6801 217.813 29.9284 224.061L201.048 395.181C207.297 401.429 217.427 401.429 223.676 395.181L394.796 224.061C401.044 217.813 401.044 207.682 394.796 201.434L223.676 30.3137C217.427 24.0653 207.297 24.0653 201.048 30.3137L29.9285 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264121)">
+            <mask id="mask0_1068_264121" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.615" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264121)">
+            <path d="M174.281 246.334L199.698 220.917L216.365 237.584L245.948 208.209V221.334H262.615V179.667H220.948V196.334H234.073L216.365 214.042L199.698 197.375L162.615 234.667L174.281 246.334ZM154.281 288C149.698 288 145.774 286.368 142.511 283.104C139.247 279.84 137.615 275.917 137.615 271.334V154.667C137.615 150.084 139.247 146.16 142.511 142.896C145.774 139.632 149.698 138 154.281 138H270.948C275.531 138 279.455 139.632 282.719 142.896C285.983 146.16 287.615 150.084 287.615 154.667V271.334C287.615 275.917 285.983 279.84 282.719 283.104C279.455 286.368 275.531 288 270.948 288H154.281ZM154.281 271.334H270.948V154.667H154.281V271.334Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264121">
+            <rect width="200" height="200" fill="white" transform="translate(112.615 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position11" data-card="11">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.8802 238.456C11.8213 224.397 11.8213 201.603 25.8802 187.544L187.101 26.324C201.159 12.2651 223.953 12.2651 238.012 26.324L399.233 187.544C413.291 201.603 413.291 224.397 399.233 238.456L238.012 399.676C223.953 413.735 201.159 413.735 187.101 399.676L25.8802 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.062 37.3848L36.9419 208.505C34.5988 210.848 34.5988 214.647 36.9419 216.99L208.062 388.11C210.405 390.453 214.204 390.453 216.547 388.11L387.667 216.99C390.01 214.647 390.01 210.848 387.667 208.505L216.547 37.3848C214.204 35.0416 210.405 35.0416 208.062 37.3848ZM29.8708 201.434C23.6224 207.682 23.6224 217.813 29.8708 224.061L200.991 395.181C207.239 401.429 217.37 401.429 223.618 395.181L394.738 224.061C400.986 217.813 400.986 207.682 394.738 201.434L223.618 30.3137C217.37 24.0653 207.239 24.0653 200.991 30.3137L29.8708 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264129)">
+            <mask id="mask0_1068_264129" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.557" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264129)">
+            <path d="M129.224 296.334C133.251 286.056 135.925 275.465 137.245 264.563C138.564 253.66 139.363 242.722 139.64 231.75C134.224 229.667 129.745 226.195 126.203 221.334C122.661 216.472 120.89 210.917 120.89 204.667V188C136.863 182.722 153.147 174.667 169.745 163.834C186.342 153 200.613 141.611 212.557 129.667C224.501 141.611 238.772 153 255.37 163.834C271.967 174.667 288.251 182.722 304.224 188V204.667C304.224 210.917 302.453 216.472 298.911 221.334C295.37 226.195 290.89 229.667 285.474 231.75C285.751 242.722 286.55 253.66 287.87 264.563C289.189 275.465 291.863 286.056 295.89 296.334H129.224ZM161.724 188H263.39C252.557 181.889 242.8 175.604 234.12 169.146C225.439 162.688 218.251 157.028 212.557 152.167C206.863 157.028 199.675 162.688 190.995 169.146C182.314 175.604 172.557 181.889 161.724 188ZM233.39 217.167C236.863 217.167 239.814 215.952 242.245 213.521C244.675 211.09 245.89 208.139 245.89 204.667H220.89C220.89 208.139 222.106 211.09 224.536 213.521C226.967 215.952 229.918 217.167 233.39 217.167ZM191.724 217.167C195.196 217.167 198.147 215.952 200.578 213.521C203.008 211.09 204.224 208.139 204.224 204.667H179.224C179.224 208.139 180.439 211.09 182.87 213.521C185.3 215.952 188.251 217.167 191.724 217.167ZM150.057 217.167C153.529 217.167 156.481 215.952 158.911 213.521C161.342 211.09 162.557 208.139 162.557 204.667H137.557C137.557 208.139 138.772 211.09 141.203 213.521C143.633 215.952 146.585 217.167 150.057 217.167ZM151.307 279.667H173.599C174.849 271.334 175.821 263.07 176.515 254.875C177.21 246.681 177.765 238.417 178.182 230.084C176.932 229.389 175.682 228.66 174.432 227.896C173.182 227.132 172.001 226.195 170.89 225.084C168.807 227.167 166.55 228.868 164.12 230.188C161.689 231.507 159.085 232.514 156.307 233.209C156.029 241.125 155.543 248.938 154.849 256.646C154.154 264.354 152.974 272.028 151.307 279.667ZM190.474 279.667H234.64C233.529 272.028 232.661 264.389 232.036 256.75C231.411 249.111 230.89 241.403 230.474 233.625C226.863 233.347 223.564 232.479 220.578 231.021C217.592 229.563 214.918 227.653 212.557 225.292C210.196 227.653 207.453 229.563 204.328 231.021C201.203 232.479 197.974 233.347 194.64 233.625C194.224 241.403 193.703 249.111 193.078 256.75C192.453 264.389 191.585 272.028 190.474 279.667ZM251.515 279.667H273.807C272.14 272.028 270.96 264.354 270.265 256.646C269.571 248.938 269.085 241.125 268.807 233.209C266.029 232.514 263.39 231.507 260.89 230.188C258.39 228.868 256.168 227.167 254.224 225.084C253.113 226.195 251.932 227.132 250.682 227.896C249.432 228.66 248.182 229.389 246.932 230.084C247.349 238.417 247.939 246.681 248.703 254.875C249.467 263.07 250.404 271.334 251.515 279.667ZM275.057 217.167C278.529 217.167 281.481 215.952 283.911 213.521C286.342 211.09 287.557 208.139 287.557 204.667H262.557C262.557 208.139 263.772 211.09 266.203 213.521C268.633 215.952 271.585 217.167 275.057 217.167Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264129">
+            <rect width="200" height="200" fill="white" transform="translate(112.557 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position12" data-card="12">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.8225 238.456C11.7637 224.397 11.7637 201.603 25.8225 187.544L187.043 26.324C201.102 12.2651 223.896 12.2651 237.955 26.324L399.175 187.544C413.234 201.603 413.234 224.397 399.175 238.456L237.955 399.676C223.896 413.735 201.102 413.735 187.043 399.676L25.8225 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.004 37.3848L36.8843 208.505C34.5411 210.848 34.5411 214.647 36.8843 216.99L208.004 388.11C210.347 390.453 214.146 390.453 216.489 388.11L387.609 216.99C389.952 214.647 389.952 210.848 387.609 208.505L216.489 37.3848C214.146 35.0416 210.347 35.0416 208.004 37.3848ZM29.8132 201.434C23.5648 207.682 23.5648 217.813 29.8132 224.061L200.933 395.181C207.181 401.429 217.312 401.429 223.56 395.181L394.68 224.061C400.929 217.813 400.929 207.682 394.68 201.434L223.56 30.3137C217.312 24.0653 207.181 24.0653 200.933 30.3137L29.8132 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264130)">
+            <mask id="mask0_1068_264130" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.5" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264130)">
+            <path d="M172.91 313C171.243 313 169.785 312.375 168.535 311.125C167.285 309.875 166.66 308.417 166.66 306.75C166.66 305.084 167.285 303.625 168.535 302.375C169.785 301.125 171.243 300.5 172.91 300.5C174.576 300.5 176.035 301.125 177.285 302.375C178.535 303.625 179.16 305.084 179.16 306.75C179.16 308.417 178.535 309.875 177.285 311.125C176.035 312.375 174.576 313 172.91 313ZM243.743 313C242.076 313 240.618 312.375 239.368 311.125C238.118 309.875 237.493 308.417 237.493 306.75C237.493 305.084 238.118 303.625 239.368 302.375C240.618 301.125 242.076 300.5 243.743 300.5C245.41 300.5 246.868 301.125 248.118 302.375C249.368 303.625 249.993 305.084 249.993 306.75C249.993 308.417 249.368 309.875 248.118 311.125C246.868 312.375 245.41 313 243.743 313ZM168.743 296.334C162.493 296.334 156.729 294.979 151.451 292.271C146.174 289.563 141.799 285.917 138.326 281.334C137.91 280.639 137.597 280.014 137.389 279.459C137.181 278.903 137.076 278.278 137.076 277.584C137.076 275.917 137.632 274.459 138.743 273.209C139.854 271.959 141.382 271.334 143.326 271.334C144.438 271.334 145.375 271.542 146.139 271.959C146.903 272.375 147.632 273 148.326 273.834C149.993 276.195 152.111 278.174 154.681 279.771C157.25 281.368 159.993 282.514 162.91 283.209L188.951 251.75L177.91 217.167C177.215 214.806 177.007 212.445 177.285 210.084C177.563 207.722 178.326 205.5 179.576 203.417L199.576 171.334H179.993L164.16 196.75L149.993 188L170.826 154.667H218.326C222.076 154.667 225.097 155.709 227.389 157.792C229.681 159.875 231.243 161.82 232.076 163.625L236.451 173.625C239.229 180.292 243.708 185.743 249.889 189.979C256.069 194.215 263.049 196.334 270.826 196.334V213C261.104 213 252.215 210.674 244.16 206.021C236.104 201.368 229.646 195.222 224.785 187.584L209.785 211.542L245.826 233.834V283.834H248.326C252.354 283.834 256.104 282.931 259.576 281.125C263.049 279.32 265.965 276.889 268.326 273.834C269.021 273 269.75 272.375 270.514 271.959C271.278 271.542 272.215 271.334 273.326 271.334C275.132 271.334 276.625 271.959 277.806 273.209C278.986 274.459 279.576 275.917 279.576 277.584C279.576 278.278 279.472 278.903 279.264 279.459C279.056 280.014 278.743 280.639 278.326 281.334C274.854 285.917 270.549 289.563 265.41 292.271C260.271 294.979 254.576 296.334 248.326 296.334H168.743ZM184.16 283.834H229.16V245.5L199.993 227.167L208.326 254.667L184.16 283.834ZM237.493 154.667C232.91 154.667 228.986 153.035 225.722 149.771C222.458 146.507 220.826 142.584 220.826 138C220.826 133.417 222.458 129.493 225.722 126.229C228.986 122.965 232.91 121.334 237.493 121.334C242.076 121.334 246 122.965 249.264 126.229C252.528 129.493 254.16 133.417 254.16 138C254.16 142.584 252.528 146.507 249.264 149.771C246 153.035 242.076 154.667 237.493 154.667Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264130">
+            <rect width="200" height="200" fill="white" transform="translate(112.5 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position13" data-card="13">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.7654 238.456C11.7065 224.397 11.7065 201.603 25.7654 187.544L186.986 26.324C201.045 12.2651 223.839 12.2651 237.897 26.324L399.118 187.544C413.177 201.603 413.177 224.397 399.118 238.456L237.897 399.676C223.839 413.735 201.045 413.735 186.986 399.676L25.7654 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M207.947 37.3848L36.8272 208.505C34.484 210.848 34.484 214.647 36.8272 216.99L207.947 388.11C210.29 390.453 214.089 390.453 216.432 388.11L387.552 216.99C389.895 214.647 389.895 210.848 387.552 208.505L216.432 37.3848C214.089 35.0416 210.29 35.0416 207.947 37.3848ZM29.7561 201.434C23.5077 207.682 23.5077 217.813 29.7561 224.061L200.876 395.181C207.124 401.429 217.255 401.429 223.503 395.181L394.623 224.061C400.872 217.813 400.872 207.682 394.623 201.434L223.503 30.3137C217.255 24.0653 207.124 24.0653 200.876 30.3137L29.7561 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264131)">
+            <mask id="mask0_1068_264131" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.442" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264131)">
+            <path d="M251.609 233.834L283.276 206.75L308.276 208.834L271.609 240.709L282.442 288L261.192 275.084L251.609 233.834ZM232.026 173L223.276 152.584L232.859 129.667L252.026 174.875L232.026 173ZM173.692 253.209L199.942 237.375L226.192 253.417L219.317 223.417L242.442 203.417L212.026 200.709L199.942 172.375L187.859 200.5L157.442 203.209L180.567 223.417L173.692 253.209ZM148.484 288L162.026 229.459L116.609 190.084L176.609 184.875L199.942 129.667L223.276 184.875L283.276 190.084L237.859 229.459L251.401 288L199.942 256.959L148.484 288Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264131">
+            <rect width="200" height="200" fill="white" transform="translate(112.442 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position14" data-card="14">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.7078 238.456C11.6489 224.397 11.6489 201.603 25.7078 187.544L186.928 26.324C200.987 12.2651 223.781 12.2651 237.84 26.324L399.06 187.544C413.119 201.603 413.119 224.397 399.06 238.456L237.84 399.676C223.781 413.735 200.987 413.735 186.928 399.676L25.7078 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M207.889 37.3848L36.7695 208.505C34.4264 210.848 34.4264 214.647 36.7695 216.99L207.889 388.11C210.233 390.453 214.032 390.453 216.375 388.11L387.494 216.99C389.838 214.647 389.838 210.848 387.494 208.505L216.375 37.3848C214.032 35.0416 210.233 35.0416 207.889 37.3848ZM29.6985 201.434C23.4501 207.682 23.4501 217.813 29.6985 224.061L200.818 395.181C207.067 401.429 217.197 401.429 223.446 395.181L394.566 224.061C400.814 217.813 400.814 207.682 394.566 201.434L223.446 30.3137C217.197 24.0653 207.067 24.0653 200.818 30.3137L29.6985 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264132)">
+            <mask id="mask0_1068_264132" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.385" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264132)">
+            <path d="M162.385 296.334V220.084C154.885 218.139 148.843 214.181 144.26 208.209C139.676 202.236 137.385 195.5 137.385 188V129.667H154.051V179.667H162.385V129.667H179.051V179.667H187.385V129.667H204.051V188C204.051 195.5 201.76 202.236 197.176 208.209C192.593 214.181 186.551 218.139 179.051 220.084V296.334H162.385ZM245.718 296.334V216.959C238.218 214.459 232.176 209.215 227.593 201.229C223.01 193.243 220.718 184.181 220.718 174.042C220.718 161.681 223.982 151.195 230.51 142.584C237.038 133.972 244.885 129.667 254.051 129.667C263.218 129.667 271.065 134.007 277.593 142.688C284.121 151.368 287.385 161.889 287.385 174.25C287.385 184.389 285.093 193.417 280.51 201.334C275.926 209.25 269.885 214.459 262.385 216.959V296.334H245.718Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264132">
+            <rect width="200" height="200" fill="white" transform="translate(112.385 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position15" data-card="15">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.6502 238.456C11.5913 224.397 11.5913 201.603 25.6502 187.544L186.871 26.324C200.929 12.2651 223.723 12.2651 237.782 26.324L399.003 187.544C413.061 201.603 413.061 224.397 399.003 238.456L237.782 399.676C223.723 413.735 200.929 413.735 186.871 399.676L25.6502 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M207.832 37.3848L36.7119 208.505C34.3688 210.848 34.3688 214.647 36.7119 216.99L207.832 388.11C210.175 390.453 213.974 390.453 216.317 388.11L387.437 216.99C389.78 214.647 389.78 210.848 387.437 208.505L216.317 37.3848C213.974 35.0416 210.175 35.0416 207.832 37.3848ZM29.6409 201.434C23.3925 207.682 23.3925 217.813 29.6409 224.061L200.761 395.181C207.009 401.429 217.14 401.429 223.388 395.181L394.508 224.061C400.756 217.813 400.756 207.682 394.508 201.434L223.388 30.3137C217.14 24.0653 207.009 24.0653 200.761 30.3137L29.6409 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264133)">
+            <mask id="mask0_1068_264133" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.327" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264133)">
+            <path d="M170.661 288C166.077 288 162.154 286.368 158.89 283.104C155.626 279.84 153.994 275.917 153.994 271.334V163H145.661V146.334H187.327V138H237.327V146.334H278.994V163H270.661V271.334C270.661 275.917 269.029 279.84 265.765 283.104C262.501 286.368 258.577 288 253.994 288H170.661ZM253.994 163H170.661V271.334H253.994V163ZM187.327 254.667H203.994V179.667H187.327V254.667ZM220.661 254.667H237.327V179.667H220.661V254.667Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264133">
+            <rect width="200" height="200" fill="white" transform="translate(112.327 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position16" data-card="16">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.5926 238.456C11.5337 224.397 11.5337 201.603 25.5926 187.544L186.813 26.324C200.872 12.2651 223.666 12.2651 237.725 26.324L398.945 187.544C413.004 201.603 413.004 224.397 398.945 238.456L237.725 399.676C223.666 413.735 200.872 413.735 186.813 399.676L25.5926 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M207.774 37.3848L36.6543 208.505C34.3112 210.848 34.3112 214.647 36.6543 216.99L207.774 388.11C210.117 390.453 213.916 390.453 216.259 388.11L387.379 216.99C389.722 214.647 389.722 210.848 387.379 208.505L216.259 37.3848C213.916 35.0416 210.117 35.0416 207.774 37.3848ZM29.5832 201.434C23.3349 207.682 23.3348 217.813 29.5832 224.061L200.703 395.181C206.951 401.429 217.082 401.429 223.33 395.181L394.45 224.061C400.699 217.813 400.699 207.682 394.45 201.434L223.33 30.3137C217.082 24.0653 206.951 24.0653 200.703 30.3137L29.5832 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264134)">
+            <mask id="mask0_1068_264134" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.27" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264134)">
+            <path d="M220.603 304.667V254.667L203.103 238L194.77 274.667L137.27 263L140.603 246.334L180.603 254.667L193.936 187.167L178.936 193V221.334H162.27V182.167L195.186 168C200.047 165.917 203.624 164.563 205.915 163.938C208.207 163.313 210.325 163 212.27 163C215.186 163 217.895 163.764 220.395 165.292C222.895 166.82 224.908 168.834 226.436 171.334L234.77 184.667C238.381 190.5 243.276 195.292 249.457 199.042C255.638 202.792 262.686 204.667 270.603 204.667V221.334C261.436 221.334 252.86 219.424 244.874 215.604C236.888 211.785 230.186 206.75 224.77 200.5L219.77 225.5L237.27 242.167V304.667H220.603ZM224.77 158.834C220.186 158.834 216.263 157.202 212.999 153.938C209.735 150.674 208.103 146.75 208.103 142.167C208.103 137.584 209.735 133.66 212.999 130.396C216.263 127.132 220.186 125.5 224.77 125.5C229.353 125.5 233.276 127.132 236.54 130.396C239.804 133.66 241.436 137.584 241.436 142.167C241.436 146.75 239.804 150.674 236.54 153.938C233.276 157.202 229.353 158.834 224.77 158.834Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264134">
+            <rect width="200" height="200" fill="white" transform="translate(112.27 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position17" data-card="17">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.5349 238.456C11.4761 224.397 11.4761 201.603 25.5349 187.544L186.755 26.324C200.814 12.2651 223.608 12.2651 237.667 26.324L398.887 187.544C412.946 201.603 412.946 224.397 398.887 238.456L237.667 399.676C223.608 413.735 200.814 413.735 186.755 399.676L25.5349 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M207.717 37.3848L36.5967 208.505C34.2535 210.848 34.2535 214.647 36.5967 216.99L207.717 388.11C210.06 390.453 213.859 390.453 216.202 388.11L387.322 216.99C389.665 214.647 389.665 210.848 387.322 208.505L216.202 37.3848C213.859 35.0416 210.06 35.0416 207.717 37.3848ZM29.5256 201.434C23.2772 207.682 23.2772 217.813 29.5256 224.061L200.645 395.181C206.894 401.429 217.024 401.429 223.273 395.181L394.393 224.061C400.641 217.813 400.641 207.682 394.393 201.434L223.273 30.3137C217.024 24.0653 206.894 24.0653 200.645 30.3137L29.5256 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264135)">
+            <mask id="mask0_1068_264135" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.212" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264135)">
+            <path d="M203.879 154.667V121.334H220.545V154.667H203.879ZM259.295 177.584L247.629 165.917L271.17 142.167L282.837 154.042L259.295 177.584ZM270.545 221.334V204.667H303.879V221.334H270.545ZM271.17 283.625L247.629 260.084L259.295 248.417L283.045 271.75L271.17 283.625ZM165.129 177.584L141.587 154.042L153.462 142.167L176.795 165.917L165.129 177.584ZM162.212 271.334H199.712C203.184 271.334 206.136 270.118 208.566 267.688C210.997 265.257 212.212 262.306 212.212 258.834C212.212 255.361 211.032 252.41 208.67 249.979C206.309 247.549 203.393 246.334 199.92 246.334H189.295L185.129 236.334C183.184 231.75 180.129 228.104 175.962 225.396C171.795 222.688 167.212 221.334 162.212 221.334C155.268 221.334 149.365 223.764 144.504 228.625C139.643 233.486 137.212 239.389 137.212 246.334C137.212 253.278 139.643 259.181 144.504 264.042C149.365 268.903 155.268 271.334 162.212 271.334ZM162.212 288C150.684 288 140.858 283.938 132.733 275.813C124.608 267.688 120.545 257.861 120.545 246.334C120.545 234.806 124.608 224.979 132.733 216.854C140.858 208.729 150.684 204.667 162.212 204.667C170.545 204.667 178.15 206.924 185.025 211.438C191.9 215.952 197.004 222.028 200.337 229.667C208.393 229.667 215.163 232.653 220.65 238.625C226.136 244.597 228.879 251.75 228.879 260.084C228.601 268 225.65 274.632 220.025 279.979C214.4 285.327 207.629 288 199.712 288H162.212ZM228.879 260.084C228.184 257.306 227.49 254.597 226.795 251.959C226.101 249.32 225.407 246.611 224.712 243.834C230.962 241.195 235.997 237.097 239.816 231.542C243.636 225.986 245.545 219.806 245.545 213C245.545 203.834 242.282 195.986 235.754 189.459C229.226 182.931 221.379 179.667 212.212 179.667C203.879 179.667 196.587 182.375 190.337 187.792C184.087 193.209 180.407 200.084 179.295 208.417C176.518 207.722 173.67 207.097 170.754 206.542C167.837 205.986 164.99 205.361 162.212 204.667C164.157 192.445 169.886 182.445 179.4 174.667C188.913 166.889 199.851 163 212.212 163C226.101 163 237.907 167.861 247.629 177.584C257.351 187.306 262.212 199.111 262.212 213C262.212 223.695 259.157 233.313 253.045 241.854C246.934 250.396 238.879 256.472 228.879 260.084Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264135">
+            <rect width="200" height="200" fill="white" transform="translate(112.212 113)"/>
+            </clipPath>
+            </defs>
+            </svg>            
+        </button>
+        <button class="card-toggle-btn position18" data-card="18">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.4773 238.456C11.4185 224.397 11.4185 201.603 25.4773 187.544L186.698 26.324C200.757 12.2651 223.55 12.2651 237.609 26.324L398.83 187.544C412.889 201.603 412.889 224.397 398.83 238.456L237.609 399.676C223.55 413.735 200.757 413.735 186.698 399.676L25.4773 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M207.659 37.3848L36.5391 208.505C34.1959 210.848 34.1959 214.647 36.5391 216.99L207.659 388.11C210.002 390.453 213.801 390.453 216.144 388.11L387.264 216.99C389.607 214.647 389.607 210.848 387.264 208.505L216.144 37.3848C213.801 35.0416 210.002 35.0416 207.659 37.3848ZM29.468 201.434C23.2196 207.682 23.2196 217.813 29.468 224.061L200.588 395.181C206.836 401.429 216.967 401.429 223.215 395.181L394.335 224.061C400.583 217.813 400.583 207.682 394.335 201.434L223.215 30.3137C216.967 24.0653 206.836 24.0653 200.588 30.3137L29.468 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264136)">
+            <mask id="mask0_1068_264136" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.154" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264136)">
+            <path d="M203.821 288V221.542C194.932 221.542 186.39 219.84 178.196 216.438C170.002 213.035 162.779 208.209 156.529 201.959C150.279 195.709 145.488 188.486 142.154 180.292C138.821 172.097 137.154 163.556 137.154 154.667V138H153.821C162.571 138 171.043 139.702 179.238 143.104C187.432 146.507 194.654 151.334 200.904 157.584C205.21 161.889 208.786 166.611 211.633 171.75C214.481 176.889 216.668 182.375 218.196 188.209C218.89 187.236 219.654 186.299 220.488 185.396C221.321 184.493 222.224 183.556 223.196 182.584C229.446 176.334 236.668 171.507 244.863 168.104C253.057 164.702 261.599 163 270.488 163H287.154V179.667C287.154 188.556 285.453 197.097 282.05 205.292C278.647 213.486 273.821 220.709 267.571 226.959C261.321 233.209 254.133 238 246.008 241.334C237.883 244.667 229.377 246.334 220.488 246.334V288H203.821ZM203.821 204.667C203.821 198 202.536 191.646 199.967 185.604C197.397 179.563 193.752 174.181 189.029 169.459C184.307 164.736 178.925 161.09 172.883 158.521C166.842 155.952 160.488 154.667 153.821 154.667C153.821 161.334 155.071 167.722 157.571 173.834C160.071 179.945 163.682 185.361 168.404 190.084C173.127 194.806 178.543 198.417 184.654 200.917C190.765 203.417 197.154 204.667 203.821 204.667ZM220.488 229.667C227.154 229.667 233.508 228.417 239.55 225.917C245.592 223.417 250.974 219.806 255.696 215.084C260.418 210.361 264.064 204.945 266.633 198.834C269.203 192.722 270.488 186.334 270.488 179.667C263.821 179.667 257.432 180.952 251.321 183.521C245.21 186.09 239.793 189.736 235.071 194.459C230.349 199.181 226.738 204.563 224.238 210.604C221.738 216.646 220.488 223 220.488 229.667Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264136">
+            <rect width="200" height="200" fill="white" transform="translate(112.154 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position19" data-card="19">
+          <svg width="426" height="426" viewBox="0 0 426 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.4197 238.456C12.3608 224.397 12.3608 201.603 26.4197 187.544L187.64 26.324C201.699 12.2651 224.493 12.2651 238.552 26.324L399.772 187.544C413.831 201.603 413.831 224.397 399.772 238.456L238.552 399.676C224.493 413.735 201.699 413.735 187.64 399.676L26.4197 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.601 37.3848L37.4815 208.505C35.1383 210.848 35.1383 214.647 37.4815 216.99L208.601 388.11C210.944 390.453 214.743 390.453 217.087 388.11L388.206 216.99C390.55 214.647 390.55 210.848 388.206 208.505L217.087 37.3848C214.743 35.0416 210.944 35.0416 208.601 37.3848ZM30.4104 201.434C24.162 207.682 24.162 217.813 30.4104 224.061L201.53 395.181C207.779 401.429 217.909 401.429 224.158 395.181L395.277 224.061C401.526 217.813 401.526 207.682 395.277 201.434L224.158 30.3137C217.909 24.0653 207.779 24.0653 201.53 30.3137L30.4104 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264137)">
+            <g clip-path="url(#clip1_1068_264137)">
+            <path d="M271.371 131.751C253.737 119.098 233.344 113 213.176 113C182.065 112.994 151.367 127.499 131.843 154.724C119.193 172.358 113.098 192.751 113.098 212.922C113.092 244.033 127.602 274.728 154.822 294.253C172.451 306.903 192.843 313.003 213.017 313C244.134 313.006 274.826 298.496 294.35 271.279C307 253.645 313.101 233.253 313.095 213.078C313.101 181.964 298.591 151.269 271.371 131.751ZM287.269 266.203C269.434 291.066 241.453 304.281 213.017 304.289C194.591 304.283 176.018 298.738 159.895 287.174C135.032 269.339 121.815 241.355 121.809 212.922C121.815 194.493 127.361 175.923 138.924 159.8C156.759 134.934 184.74 121.72 213.176 121.714C231.602 121.717 250.17 127.265 266.298 138.829C291.161 156.661 304.378 184.642 304.384 213.078C304.384 231.507 298.833 250.078 287.269 266.203Z" fill="#FCFDFF"/>
+            <path d="M254.558 155.197C242.002 146.193 227.516 141.865 213.165 141.865C211.275 141.865 209.391 141.938 207.513 142.089C196.641 142.951 186.01 146.291 176.532 151.966C168.423 156.815 161.153 163.373 155.294 171.54C150.564 178.134 147.127 185.262 144.924 192.627C141.977 202.487 141.257 212.765 142.639 222.743C143.714 230.542 146.082 238.157 149.678 245.244C154.675 255.095 162.045 263.921 171.642 270.804C184.197 279.807 198.684 284.139 213.035 284.139C235.187 284.139 257.009 273.828 270.899 254.46C293.795 222.537 286.478 178.096 254.558 155.197ZM166.167 255.895C165.913 255.621 165.653 255.346 165.405 255.062C165.889 255.047 166.681 254.572 167.744 253.692L166.167 255.895ZM215.982 257.72L209.905 260.017C208.812 260.431 207.59 259.879 207.176 258.786L204.879 252.706C204.466 251.617 205.021 250.394 206.114 249.98L212.196 247.686C213.283 247.272 214.506 247.822 214.919 248.911L217.216 254.991C217.623 256.087 217.08 257.306 215.982 257.72ZM207.336 224.217C208.942 221.973 212.06 221.462 214.305 223.065C216.543 224.677 217.062 227.792 215.45 230.034C213.844 232.278 210.726 232.792 208.482 231.179C206.243 229.576 205.723 226.458 207.336 224.217ZM217.116 176.555C206.32 191.605 164.082 243.504 165.086 254.714C161.696 250.819 158.791 246.519 156.41 241.83C153.21 235.512 151.089 228.743 150.115 221.707C148.851 212.6 149.542 203.544 152.158 194.785C154.166 188.059 157.284 181.716 161.43 175.94C166.55 168.801 172.941 162.912 180.405 158.445C188.767 153.442 198.341 150.389 208.109 149.613C209.78 149.48 211.481 149.412 213.164 149.412C222.046 149.412 230.675 151.284 238.671 154.813L237.98 155.772V155.769C236.51 151.594 228 161.377 217.116 176.555ZM237.053 202.61L237.195 193.894C237.219 192.329 238.506 191.08 240.071 191.1L248.788 191.239C250.353 191.262 251.599 192.55 251.576 194.112L251.446 202.829C251.422 204.397 250.129 205.649 248.569 205.622L239.853 205.49C238.282 205.466 237.036 204.179 237.053 202.61ZM255.396 234.345C253.211 237.392 248.965 238.095 245.912 235.904C242.865 233.722 242.168 229.472 244.353 226.425C246.538 223.378 250.784 222.678 253.837 224.863C256.885 227.049 257.587 231.297 255.396 234.345Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264137">
+            <rect width="200" height="200" fill="white" transform="translate(113.097 113)"/>
+            </clipPath>
+            <clipPath id="clip1_1068_264137">
+            <rect width="200" height="200" fill="white" transform="translate(113.097 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position20" data-card="20">
+          <svg width="426" height="426" viewBox="0 0 426 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.3621 238.456C12.3032 224.397 12.3032 201.603 26.3621 187.544L187.582 26.324C201.641 12.2651 224.435 12.2651 238.494 26.324L399.714 187.544C413.773 201.603 413.773 224.397 399.714 238.456L238.494 399.676C224.435 413.735 201.641 413.735 187.582 399.676L26.3621 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.544 37.3848L37.4238 208.505C35.0807 210.848 35.0807 214.647 37.4238 216.99L208.544 388.11C210.887 390.453 214.686 390.453 217.029 388.11L388.149 216.99C390.492 214.647 390.492 210.848 388.149 208.505L217.029 37.3848C214.686 35.0416 210.887 35.0416 208.544 37.3848ZM30.3528 201.434C24.1044 207.682 24.1044 217.813 30.3528 224.061L201.473 395.181C207.721 401.429 217.852 401.429 224.1 395.181L395.22 224.061C401.468 217.813 401.468 207.682 395.22 201.434L224.1 30.3137C217.852 24.0653 207.721 24.0653 201.473 30.3137L30.3528 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264138)">
+            <mask id="mask0_1068_264138" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="113" y="113" width="201" height="201">
+            <rect x="113.039" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264138)">
+            <path d="M163.03 204.25L154.697 208.834C152.752 209.945 150.669 210.222 148.447 209.667C146.225 209.111 144.558 207.861 143.447 205.917L126.78 176.75C125.669 174.806 125.391 172.722 125.947 170.5C126.502 168.278 127.752 166.611 129.697 165.5L177.613 138H192.197C193.447 138 194.454 138.382 195.218 139.146C195.981 139.91 196.363 140.917 196.363 142.167V146.334C196.363 150.917 197.995 154.84 201.259 158.104C204.523 161.368 208.447 163 213.03 163C217.613 163 221.537 161.368 224.801 158.104C228.065 154.84 229.697 150.917 229.697 146.334V142.167C229.697 140.917 230.079 139.91 230.843 139.146C231.606 138.382 232.613 138 233.863 138H248.447L296.363 165.5C298.308 166.611 299.558 168.278 300.113 170.5C300.669 172.722 300.391 174.806 299.28 176.75L282.613 205.917C281.502 207.861 279.87 209.077 277.718 209.563C275.565 210.049 273.447 209.736 271.363 208.625L263.03 204.459V279.667C263.03 282.028 262.231 284.007 260.634 285.604C259.037 287.202 257.058 288 254.697 288H171.363C169.002 288 167.023 287.202 165.426 285.604C163.829 284.007 163.03 282.028 163.03 279.667V204.25ZM179.697 176.334V271.334H246.363V176.334L272.197 190.5L280.947 175.917L245.113 155.084C243.03 162.167 239.106 168.035 233.343 172.688C227.579 177.34 220.808 179.667 213.03 179.667C205.252 179.667 198.481 177.34 192.718 172.688C186.954 168.035 183.03 162.167 180.947 155.084L145.113 175.917L153.863 190.5L179.697 176.334Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264138">
+            <rect width="200" height="200" fill="white" transform="translate(113.039 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position21" data-card="21">
+          <svg width="426" height="426" viewBox="0 0 426 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.3045 238.456C12.2456 224.397 12.2456 201.603 26.3045 187.544L187.525 26.324C201.584 12.2651 224.378 12.2651 238.437 26.324L399.657 187.544C413.716 201.603 413.716 224.397 399.657 238.456L238.437 399.676C224.378 413.735 201.584 413.735 187.525 399.676L26.3045 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.486 37.3848L37.3662 208.505C35.0231 210.848 35.0231 214.647 37.3662 216.99L208.486 388.11C210.829 390.453 214.628 390.453 216.971 388.11L388.091 216.99C390.434 214.647 390.434 210.848 388.091 208.505L216.971 37.3848C214.628 35.0416 210.829 35.0416 208.486 37.3848ZM30.2952 201.434C24.0468 207.682 24.0468 217.813 30.2951 224.061L201.415 395.181C207.663 401.429 217.794 401.429 224.042 395.181L395.162 224.061C401.411 217.813 401.411 207.682 395.162 201.434L224.042 30.3137C217.794 24.0653 207.663 24.0653 201.415 30.3137L30.2952 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264200)">
+            <path d="M216.162 287.76L118.703 189.359L112.981 197.382L210.454 295.79L210.468 295.805C221.546 306.893 235.61 312.996 250.095 313H312.562V302.481H250.095C237.707 302.481 225.639 297.252 216.162 287.76Z" fill="#FCFDFF"/>
+            <path d="M250.096 291.966C250.096 291.966 274.987 291.966 297.092 291.966C319.196 291.966 315.882 265.671 301.513 261.729C291.819 259.068 279.372 252.95 279.372 252.95C274.459 251.001 270.436 246.729 268.262 241.148C268.262 241.148 267.724 239.791 266.821 237.508L248.776 243.997C246.805 244.707 244.721 243.383 244.125 241.038C243.531 238.692 244.643 236.214 246.615 235.508L263.618 229.39C262.156 225.684 260.46 221.379 258.674 216.835L241.81 222.905C239.838 223.615 237.755 222.28 237.158 219.942C236.56 217.596 237.681 215.118 239.648 214.409L255.48 208.713C253.795 204.412 252.12 200.129 250.568 196.147L234.843 201.808C232.871 202.515 230.788 201.19 230.19 198.845C229.598 196.499 230.709 194.021 232.681 193.316L247.411 188.014C245.3 182.547 243.768 178.495 243.36 177.238C241.588 171.756 237.695 156.549 228.812 165.002C214.206 178.911 187.561 174.833 180.682 159.631C175.525 148.236 178.473 135.968 180.682 126.327C182.45 118.622 173.312 106.606 166.683 117.125C161.992 124.559 122.474 180.223 122.474 180.223L221.858 279.711C229.765 287.627 239.764 291.966 250.096 291.966Z" fill="#FCFDFF"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264200">
+            <rect width="200" height="200" fill="white" transform="translate(112.981 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position22" data-card="22">
+          <svg width="426" height="426" viewBox="0 0 426 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.2469 238.456C12.188 224.397 12.188 201.603 26.2469 187.544L187.467 26.324C201.526 12.2651 224.32 12.2651 238.379 26.324L399.599 187.544C413.658 201.603 413.658 224.397 399.599 238.456L238.379 399.676C224.32 413.735 201.526 413.735 187.467 399.676L26.2469 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.428 37.3848L37.3086 208.505C34.9655 210.848 34.9655 214.647 37.3086 216.99L208.428 388.11C210.772 390.453 214.571 390.453 216.914 388.11L388.034 216.99C390.377 214.647 390.377 210.848 388.034 208.505L216.914 37.3848C214.571 35.0416 210.772 35.0416 208.428 37.3848ZM30.2375 201.434C23.9891 207.682 23.9891 217.813 30.2375 224.061L201.357 395.181C207.606 401.429 217.736 401.429 223.985 395.181L395.105 224.061C401.353 217.813 401.353 207.682 395.105 201.434L223.985 30.3137C217.736 24.0653 207.606 24.0653 201.357 30.3137L30.2375 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264208)">
+            <mask id="mask0_1068_264208" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.924" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264208)">
+            <path d="M212.924 163C208.341 163 204.417 161.368 201.153 158.104C197.889 154.84 196.257 150.917 196.257 146.334C196.257 141.75 197.889 137.827 201.153 134.563C204.417 131.299 208.341 129.667 212.924 129.667C217.507 129.667 221.431 131.299 224.695 134.563C227.959 137.827 229.591 141.75 229.591 146.334C229.591 150.917 227.959 154.84 224.695 158.104C221.431 161.368 217.507 163 212.924 163ZM254.591 296.334V254.667H212.924C208.341 254.667 204.417 253.035 201.153 249.771C197.889 246.507 196.257 242.584 196.257 238V188C196.257 183.417 197.889 179.493 201.153 176.229C204.417 172.965 208.341 171.334 212.924 171.334C216.257 171.334 219.139 172.063 221.57 173.521C224.001 174.979 226.605 177.306 229.382 180.5C237.021 189.667 243.931 195.952 250.112 199.354C256.292 202.757 263.341 204.528 271.257 204.667V221.334C263.896 221.334 256.466 219.736 248.966 216.542C241.466 213.347 235.007 209.528 229.591 205.084V233.834H254.591C259.174 233.834 263.098 235.465 266.362 238.729C269.626 241.993 271.257 245.917 271.257 250.5V296.334H254.591ZM196.257 296.334C184.73 296.334 174.903 292.271 166.778 284.146C158.653 276.021 154.591 266.195 154.591 254.667C154.591 244.667 157.751 235.847 164.07 228.209C170.389 220.57 178.341 215.778 187.924 213.834V230.917C183.063 232.861 179.07 235.952 175.945 240.188C172.82 244.424 171.257 249.25 171.257 254.667C171.257 261.611 173.688 267.514 178.549 272.375C183.41 277.236 189.313 279.667 196.257 279.667C201.674 279.667 206.501 278.104 210.737 274.979C214.973 271.854 218.063 267.861 220.007 263H237.091C235.146 272.584 230.355 280.535 222.716 286.854C215.077 293.174 206.257 296.334 196.257 296.334Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264208">
+            <rect width="200" height="200" fill="white" transform="translate(112.924 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        <button class="card-toggle-btn position23" data-card="23">
+          <svg width="425" height="426" viewBox="0 0 425 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.1912 238.456C12.1323 224.397 12.1323 201.603 26.1912 187.544L187.412 26.324C201.47 12.2651 224.264 12.2651 238.323 26.324L399.544 187.544C413.602 201.603 413.602 224.397 399.544 238.456L238.323 399.676C224.264 413.735 201.47 413.735 187.412 399.676L26.1912 238.456Z" fill="#009EDB"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M208.373 37.3848L37.2529 208.505C34.9098 210.848 34.9098 214.647 37.2529 216.99L208.373 388.11C210.716 390.453 214.515 390.453 216.858 388.11L387.978 216.99C390.321 214.647 390.321 210.848 387.978 208.505L216.858 37.3848C214.515 35.0416 210.716 35.0416 208.373 37.3848ZM30.1819 201.434C23.9335 207.682 23.9335 217.813 30.1819 224.061L201.302 395.181C207.55 401.429 217.681 401.429 223.929 395.181L395.049 224.061C401.297 217.813 401.297 207.682 395.049 201.434L223.929 30.3137C217.681 24.0653 207.55 24.0653 201.302 30.3137L30.1819 201.434Z" fill="#FCFDFF"/>
+            <g clip-path="url(#clip0_1068_264216)">
+            <mask id="mask0_1068_264216" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="112" y="113" width="201" height="201">
+            <rect x="112.868" y="113" width="200" height="200" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1068_264216)">
+            <path d="M212.868 188L183.701 158.834L212.868 129.667L242.035 158.834L212.868 188ZM121.201 279.667V246.334C121.201 241.611 122.833 237.653 126.097 234.459C129.361 231.264 133.285 229.667 137.868 229.667H165.16C167.937 229.667 170.576 230.361 173.076 231.75C175.576 233.139 177.59 235.014 179.118 237.375C183.146 242.792 188.111 247.028 194.014 250.084C199.916 253.139 206.201 254.667 212.868 254.667C219.673 254.667 226.028 253.139 231.93 250.084C237.833 247.028 242.729 242.792 246.618 237.375C248.423 235.014 250.541 233.139 252.972 231.75C255.403 230.361 257.937 229.667 260.576 229.667H287.868C292.59 229.667 296.548 231.264 299.743 234.459C302.937 237.653 304.534 241.611 304.534 246.334V279.667H246.201V260.709C241.34 264.181 236.097 266.82 230.472 268.625C224.847 270.431 218.979 271.334 212.868 271.334C206.896 271.334 201.062 270.396 195.368 268.521C189.673 266.646 184.396 263.972 179.535 260.5V279.667H121.201ZM146.201 221.334C139.257 221.334 133.354 218.903 128.493 214.042C123.632 209.181 121.201 203.278 121.201 196.334C121.201 189.25 123.632 183.313 128.493 178.521C133.354 173.729 139.257 171.334 146.201 171.334C153.285 171.334 159.222 173.729 164.014 178.521C168.805 183.313 171.201 189.25 171.201 196.334C171.201 203.278 168.805 209.181 164.014 214.042C159.222 218.903 153.285 221.334 146.201 221.334ZM279.534 221.334C272.59 221.334 266.687 218.903 261.826 214.042C256.965 209.181 254.535 203.278 254.535 196.334C254.535 189.25 256.965 183.313 261.826 178.521C266.687 173.729 272.59 171.334 279.534 171.334C286.618 171.334 292.555 173.729 297.347 178.521C302.139 183.313 304.534 189.25 304.534 196.334C304.534 203.278 302.139 209.181 297.347 214.042C292.555 218.903 286.618 221.334 279.534 221.334Z" fill="#FCFDFF"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1068_264216">
+            <rect width="200" height="200" fill="white" transform="translate(112.868 113)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            
+        </button>
+        
+  <!-- 他のカードボタンも追加 -->
+      <!-- <img src="img/Group.svg" alt="" id="building-opacity"> -->
+        <div class="background">
+          <div class="layer-building" id="building-opacity" >
+            <img src="img/building.webp" alt="">
+          </div>
+          <div id="road-layers-container">
+            <img id="road-layer-1" class="road-layer" src="img/default.webp" alt="Road Layer 1">
+            <img id="road-layer-2" class="road-layer" src="img/grass.webp" alt="Road Layer 2" style="display: none;">
+            <img id="road-layer-3" class="road-layer" src="img/sea.webp" alt="Road Layer 2" style="display: none;">
+            <img id="road-layer-4" class="road-layer" src="img/star.webp" alt="Road Layer 2" style="display: none;">
+            <img id="road-layer-5" class="road-layer" src="img/biglove.webp" alt="Road Layer 2" style="display: none;">
+            <img id="road-layer-6" class="road-layer" src="img/street.webp" alt="Road Layer 2" style="display: none;">
+            <img id="road-layer-7" class="road-layer" src="" alt="Road Layer 2" style="display: none;">
+            <img id="road-layer-8" class="road-layer" src="" alt="Road Layer 8" style="display: none;">
+          </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
+
